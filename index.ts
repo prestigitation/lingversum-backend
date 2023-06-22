@@ -10,8 +10,8 @@ import bodyParser from "body-parser";
 require("dotenv").config();
 
 import i18next from "i18next";
-import Backend from "i18next-fs-backend";
-import i18nextMiddleware from 'i18next-http-middleware';
+import Backend from "i18next-node-fs-backend";
+import i18nextMiddleware from 'i18next-express-middleware';
 
 i18next
     .use(Backend)
@@ -27,8 +27,8 @@ i18next
 const root = new RouteGroup('/', Router());
 
 root.group('/api/v1', (router: Router) => {
-    router.post("/login", Container.get(authController).login);
-    router.post("/register", Container.get(authController).register);
+    router.post("/login", Container.get(authController).login as any);
+    router.post("/register", Container.get(authController).register as any);
 });
 
 const app: Express = express();

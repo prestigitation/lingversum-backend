@@ -34,11 +34,11 @@ const typedi_1 = __importDefault(require("typedi"));
 const body_parser_1 = __importDefault(require("body-parser"));
 require("dotenv").config();
 const i18next_1 = __importDefault(require("i18next"));
-const i18next_fs_backend_1 = __importDefault(require("i18next-fs-backend"));
-const i18next_http_middleware_1 = __importDefault(require("i18next-http-middleware"));
+const i18next_node_fs_backend_1 = __importDefault(require("i18next-node-fs-backend"));
+const i18next_express_middleware_1 = __importDefault(require("i18next-express-middleware"));
 i18next_1.default
-    .use(i18next_fs_backend_1.default)
-    .use(i18next_http_middleware_1.default.LanguageDetector)
+    .use(i18next_node_fs_backend_1.default)
+    .use(i18next_express_middleware_1.default.LanguageDetector)
     .init({
     backend: {
         loadPath: __dirname + '/resources/locales/{{lng}}/{{ns}}.json'
@@ -55,5 +55,5 @@ const app = (0, express_1.default)();
 const port = process.env.APP_PORT || 3000;
 app.use(body_parser_1.default.json());
 app.use('/', root.export());
-app.use(i18next_http_middleware_1.default.handle(i18next_1.default));
+app.use(i18next_express_middleware_1.default.handle(i18next_1.default));
 app.listen(port);
